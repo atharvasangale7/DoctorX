@@ -1,0 +1,73 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == userId ||
+                   get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+
+    match /normalusers/{userId} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid == userId ||
+                   get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+
+      // ✅ Allow full write for admins
+      allow write: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+
+      // ✅ Allow partial write (ratings only) for authenticated users
+      allow update: if request.auth != null &&
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['ratings', 'averageRating', 'ratingCount']);
+    }
+
+    match /orders/{orderId} {
+      allow create: if request.auth != null &&
+                    request.resource.data.userId == request.auth.uid;
+
+      allow read, update, delete: if request.auth != null &&
+        (
+          resource.data.userId == request.auth.uid ||
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true ||
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isDelivery == true
+        );
+
+      match /addresses/{addressId} {
+        allow read, write: if request.auth != null && request.auth.uid == orderId;
+      }
+    }
+
+    match /carts/{userId}/items/{itemId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /normalusers/{userId}/recentlySearched/{searchId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /b/{bucket}/o {
+      match /{allPaths=**} {
+        allow read, write: if true;
+      }
+    }
+
+    match /username/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // Added rules for the userC&I collection to allow reading and writing comments
+    match /userC&I/{docId} {
+      // Allow read for authenticated users
+      allow read: if request.auth != null;
+
+      // Allow write (adding comments) only for authenticated users
+      allow write: if request.auth != null;
+    }
+  }
+}
