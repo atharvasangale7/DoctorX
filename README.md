@@ -30,7 +30,7 @@ samples, guidance on mobile development, and a full API reference.
 ![image alt](https://github.com/atharvasangale7/DoctorX/blob/95a0cde78807d4aaed6817064b581ae68c0ee239/WhatsApp%20Image%202025-06-10%20at%2011.10.21%20AM.jpeg)
 ![image alt](https://github.com/atharvasangale7/DoctorX/blob/aa18314826f6c25ee6a2d3639de21e99d813b982/WhatsApp%20Image%202025-06-10%20at%2011.10.23%20AM.jpeg)
 ![image alt](https://github.com/atharvasangale7/DoctorX/blob/a03ce05dd1f70400f0f1f318010be20e5d9bd850/WhatsApp%20Image%202025-06-10%20at%2011.10.24%20AM%20(1).jpeg)
-![image alt](https://github.com/atharvasangale7/DoctorX/blob/95a0cde78807d4aaed6817064b581ae68c0ee239/WhatsApp%20Image%202025-06-10%20at%2011.10.21%20AM.jpeg)
+![image alt](https://github.com/atharvasangale7/DoctorX/blob/15bc7617b88155dc3310c2a44bf184047bd9ee93/WhatsApp%20Image%202025-06-10%20at%2011.10.24%20AM.jpeg)
 
 
 https://github.com/atharvasangale7/DoctorX/blob/aa18314826f6c25ee6a2d3639de21e99d813b982/WhatsApp%20Image%202025-06-10%20at%2011.10.23%20AM.jpeg
